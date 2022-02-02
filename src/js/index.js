@@ -1,12 +1,24 @@
-//import react into the bundle
 import React from "react";
 import ReactDOM from "react-dom";
 
 // include your styles into the webpack bundle
 import "../styles/index.css";
 
-//import your own components
-import Home from "./component/home.jsx";
+const Counter = (props) => {
+	return (
+		<div className="container">
+			<i className="bi bi-clock"></i>
+			<div className="numbers">{props.one}</div>
+		</div>
+	);
+};
 
-//render your react application
-ReactDOM.render(<Home />, document.querySelector("#app"));
+let seconds = 0;
+
+setInterval(() => {
+	ReactDOM.render(
+		<Counter one={(seconds / 100000).toFixed(5).toString().slice(2)} />,
+		document.querySelector("#app")
+	);
+	seconds++;
+}, 1000);
